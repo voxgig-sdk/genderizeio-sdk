@@ -1,0 +1,83 @@
+# Entity: get_gender
+
+main: kit: entity: get_gender: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "count"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "gender"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "probability"
+      req: false
+      type: "`$NUMBER`"
+    }
+  ]
+
+  name: "get_gender"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "apikey"
+                orig: "apikey"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "US"
+                kind: "query"
+                name: "country_id"
+                orig: "country_id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "peter"
+                kind: "query"
+                name: "name"
+                orig: "name"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/"
+          select: {
+            exist: [
+              "apikey"
+              "country_id"
+              "name"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

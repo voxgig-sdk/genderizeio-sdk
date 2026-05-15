@@ -1,0 +1,25 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Genderize.io"
+        url: "https://genderize.io/"
+      }
+      description: "A simple API that predicts the gender of a person based on a first name. Genderize uses statistical analysis of over 1 billion names to determine the likely gender associated with a given first name. The API supports localization by country and handles names from different cultural backgrounds."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://api.genderize.io"
+        }
+      ]
+      termsOfService: "https://genderize.io/"
+      title: "Genderize.io"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

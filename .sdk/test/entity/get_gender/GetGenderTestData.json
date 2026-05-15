@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "get_gender": {
+      "GET_GENDER00": {
+        "count": "s28",
+        "gender": "s29",
+        "name": "s2a",
+        "probability": 43
+      },
+      "GET_GENDER01": {
+        "count": "s50",
+        "gender": "s51",
+        "name": "s52",
+        "probability": 83
+      },
+      "GET_GENDER02": {
+        "count": "s78",
+        "gender": "s79",
+        "name": "s7a",
+        "probability": 123
+      }
+    }
+  },
+  "new": {
+    "get_gender": {
+      "get_gender_ref01": {
+        "count": "sa0",
+        "gender": "sa1",
+        "name": "sa2",
+        "probability": 163
+      }
+    }
+  }
+}

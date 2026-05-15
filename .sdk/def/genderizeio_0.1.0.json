@@ -1,0 +1,264 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Genderize.io",
+    "description": "A simple API that predicts the gender of a person based on a first name. Genderize uses statistical analysis of over 1 billion names to determine the likely gender associated with a given first name. The API supports localization by country and handles names from different cultural backgrounds.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Genderize.io",
+      "url": "https://genderize.io/"
+    },
+    "termsOfService": "https://genderize.io/"
+  },
+  "servers": [
+    {
+      "url": "https://api.genderize.io",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Predict gender from name",
+        "description": "Returns the predicted gender for a given first name, along with a probability score and sample count. Supports single or multiple names, with optional country localization. Free tier allows 100 requests per day without API key.",
+        "operationId": "getGender",
+        "tags": [
+          "Gender Prediction"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "First name to predict gender for. Can be provided multiple times for batch requests (e.g., name=peter&name=lois). Supports diacritics and non-latin alphabets.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "peter"
+          },
+          {
+            "name": "country_id",
+            "in": "query",
+            "description": "ISO 3166-1 alpha-2 country code to localize the prediction (e.g., US, GB, FR). Improves accuracy by scoping to specific cultural naming conventions.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$"
+            },
+            "example": "US"
+          },
+          {
+            "name": "apikey",
+            "in": "query",
+            "description": "API key for authenticated requests. Required for requests exceeding the free tier limit of 100 names per day.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful gender prediction response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/GenderResponse"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GenderResponse"
+                      }
+                    }
+                  ]
+                },
+                "examples": {
+                  "singleName": {
+                    "summary": "Single name prediction",
+                    "value": {
+                      "name": "peter",
+                      "gender": "male",
+                      "probability": 0.99,
+                      "count": 796799
+                    }
+                  },
+                  "withCountry": {
+                    "summary": "Prediction with country localization",
+                    "value": {
+                      "name": "kim",
+                      "gender": "female",
+                      "probability": 0.73,
+                      "count": 12456,
+                      "country_id": "US"
+                    }
+                  },
+                  "multipleNames": {
+                    "summary": "Batch prediction for multiple names",
+                    "value": [
+                      {
+                        "name": "peter",
+                        "gender": "male",
+                        "probability": 0.99,
+                        "count": 796799
+                      },
+                      {
+                        "name": "lois",
+                        "gender": "female",
+                        "probability": 0.98,
+                        "count": 52819
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Invalid parameter format"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Invalid API key"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Missing required name parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Missing name parameter"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "Request limit reached"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GenderResponse": {
+        "type": "object",
+        "description": "Gender prediction response for a single name",
+        "required": [
+          "name",
+          "gender",
+          "probability",
+          "count"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The first name that was analyzed",
+            "example": "peter"
+          },
+          "gender": {
+            "type": "string",
+            "description": "Predicted gender for the name. Can be 'male', 'female', or null if insufficient data",
+            "enum": [
+              "male",
+              "female",
+              null
+            ],
+            "example": "male"
+          },
+          "probability": {
+            "type": "number",
+            "format": "float",
+            "description": "Confidence score of the prediction (0.0 to 1.0). Values closer to 0.5 indicate unisex names",
+            "minimum": 0,
+            "maximum": 1,
+            "example": 0.99
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of data records used to determine the gender prediction",
+            "minimum": 0,
+            "example": 796799
+          },
+          "country_id": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code if country localization was requested",
+            "pattern": "^[A-Z]{2}$",
+            "example": "US"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "Error response object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message describing what went wrong",
+            "example": "Invalid API key"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "apikey",
+        "description": "API key for authenticated requests. Required for usage beyond the free tier of 100 requests per day. Obtain your API key by registering at https://genderize.io/"
+      }
+    }
+  },
+  "security": [
+    {},
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Gender Prediction",
+      "description": "Endpoints for predicting gender from first names using statistical analysis"
+    }
+  ],
+  "externalDocs": {
+    "description": "Full API documentation and resources",
+    "url": "https://genderize.io/"
+  }
+}
