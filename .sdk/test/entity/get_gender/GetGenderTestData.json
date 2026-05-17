@@ -5,19 +5,22 @@
         "count": "s28",
         "gender": "s29",
         "name": "s2a",
-        "probability": 43
+        "probability": 43,
+        "id": "GET_GENDER00"
       },
       "GET_GENDER01": {
         "count": "s50",
         "gender": "s51",
         "name": "s52",
-        "probability": 83
+        "probability": 83,
+        "id": "GET_GENDER01"
       },
       "GET_GENDER02": {
         "count": "s78",
         "gender": "s79",
         "name": "s7a",
-        "probability": 123
+        "probability": 123,
+        "id": "GET_GENDER02"
       }
     }
   },

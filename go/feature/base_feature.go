@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/genderizeio-sdk/core"
+	"github.com/voxgig-sdk/genderizeio-sdk/go/core"
 )
 
 type BaseFeature struct {

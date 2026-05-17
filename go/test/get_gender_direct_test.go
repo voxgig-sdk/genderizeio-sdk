@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/genderizeio-sdk"
-	"github.com/voxgig-sdk/genderizeio-sdk/core"
+	sdk "github.com/voxgig-sdk/genderizeio-sdk/go"
+	"github.com/voxgig-sdk/genderizeio-sdk/go/core"
 )
 
 func TestGetGenderDirect(t *testing.T) {

@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/genderizeio-sdk"
-	"github.com/voxgig-sdk/genderizeio-sdk/core"
+	sdk "github.com/voxgig-sdk/genderizeio-sdk/go"
+	"github.com/voxgig-sdk/genderizeio-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/genderizeio-sdk/go/utility/struct"
 )
 
 func TestGetGenderEntity(t *testing.T) {
