@@ -117,7 +117,6 @@ func get_genderBasicSetup(extra map[string]any) *entityTestSetup {
 		"GENDERIZEIO_TEST_GET_GENDER_ENTID": idmap,
 		"GENDERIZEIO_TEST_LIVE":      "FALSE",
 		"GENDERIZEIO_TEST_EXPLAIN":   "FALSE",
-		"GENDERIZEIO_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["GENDERIZEIO_TEST_GET_GENDER_ENTID"])
@@ -128,7 +127,6 @@ func get_genderBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["GENDERIZEIO_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["GENDERIZEIO_APIKEY"],
 			},
 			extra,
 		})

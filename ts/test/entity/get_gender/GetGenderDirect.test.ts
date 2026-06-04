@@ -78,14 +78,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'GENDERIZEIO_TEST_GET_GENDER_ENTID': {},
     'GENDERIZEIO_TEST_LIVE': 'FALSE',
-    'GENDERIZEIO_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.GENDERIZEIO_TEST_LIVE
 
   if (live) {
     const client = new GenderizeioSDK({
-      apikey: env.GENDERIZEIO_APIKEY,
     })
 
     let idmap: any = env['GENDERIZEIO_TEST_GET_GENDER_ENTID']

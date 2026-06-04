@@ -18,7 +18,17 @@
         ],
         "termsOfService": "https://genderize.io/",
         "title": "Genderize.io",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Predict the likely gender of a person from their first name, with a probability score",
+        "homepage": "https://genderize.io",
+        "docs_url": "https://genderize.io",
+        "license_short": "Commercial API with a free monthly allowance; paid plans for higher volume.",
+        "license_md": "- Free tier of 2,500 names/month, no credit card required.\n- Paid plans start at $20/month for higher request volumes.\n- An API key is shared across the Demografix family (Genderize, Agify, Nationalize).\n- Consult the official site for current terms of service.",
+        "about_md": "[Genderize.io](https://genderize.io) is a name-to-gender prediction service operated by Demografix ApS, alongside its sister APIs [Agify.io](https://agify.io) (age estimation) and [Nationalize.io](https://nationalize.io) (nationality prediction). All three are backed by the same underlying name dataset.\n\nThe service works by looking a first name up in a corpus of more than 1 billion people and returning the proportion of that name observed as male or female. A returned probability of 0.92 for `female` means 92% of the people with that name in the dataset are female.\n\nWhat you get from the API:\n- A single `GET` endpoint at `https://api.genderize.io` taking a `name` query parameter.\n- A predicted `gender` (`male` or `female`), a `probability` score, and a `count` of how many entries in the dataset matched the name.\n- Optional country-specific scoping — useful because, for example, \"Kim\" skews male in Denmark but female in the United States.\n\nThe free tier permits 2,500 names per month without a credit card; higher volumes require a paid plan and API key. Keys are shared across the Demografix family of APIs.",
+        "entity_desc": {
+          "get_gender": "Gender prediction for a first name, served by `GET https://api.genderize.io?name={name}`, returning `gender`, `probability`, and `count` fields."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -26,7 +36,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "get_gender": {
