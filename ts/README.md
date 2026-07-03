@@ -10,7 +10,7 @@ The TypeScript SDK for the Genderizeio API — a type-safe, entity-oriented clie
 
 ## Install
 ```bash
-npm install genderizeio
+npm install @voxgig-sdk/genderizeio
 ```
 ## Tutorial: your first API call
 

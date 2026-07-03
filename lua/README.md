@@ -10,7 +10,7 @@ The Lua SDK for the Genderizeio API — an entity-oriented client using Lua conv
 
 ## Install
 ```bash
-luarocks install genderizeio-sdk
+luarocks install voxgig-sdk-genderizeio
 ```
 
 If the module is not yet published, add the source directory to

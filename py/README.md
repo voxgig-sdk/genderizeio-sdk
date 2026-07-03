@@ -10,7 +10,7 @@ The Python SDK for the Genderizeio API — an entity-oriented client following P
 
 ## Install
 ```bash
-pip install genderizeio-sdk
+pip install voxgig-sdk-genderizeio
 ```
 
 Or install from source:
