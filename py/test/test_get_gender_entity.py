@@ -91,6 +91,7 @@ def _get_gender_basic_setup(extra):
         "GENDERIZEIO_TEST_GET_GENDER_ENTID": idmap,
         "GENDERIZEIO_TEST_LIVE": "FALSE",
         "GENDERIZEIO_TEST_EXPLAIN": "FALSE",
+        "GENDERIZEIO_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _get_gender_basic_setup(extra):
     if env.get("GENDERIZEIO_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("GENDERIZEIO_APIKEY"),
             },
             extra or {},
         ])

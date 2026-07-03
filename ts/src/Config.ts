@@ -38,6 +38,10 @@ class Config {
   options = {
     base: 'https://api.genderize.io',
 
+    auth: {
+      prefix: 'Bearer',
+    },
+
     headers: {
       "content-type": "application/json"
     },
@@ -55,72 +59,75 @@ class Config {
     "get_gender": {
       "fields": [
         {
+          "active": true,
           "name": "count",
           "req": false,
           "type": "`$INTEGER`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "gender",
           "req": false,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "name",
           "req": false,
           "type": "`$STRING`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "probability",
           "req": false,
           "type": "`$NUMBER`",
-          "active": true,
           "index$": 3
         }
       ],
       "name": "get_gender",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "query": [
                   {
+                    "active": true,
                     "kind": "query",
                     "name": "apikey",
                     "orig": "apikey",
                     "reqd": false,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "US",
                     "kind": "query",
                     "name": "country_id",
                     "orig": "country_id",
                     "reqd": false,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": "peter",
                     "kind": "query",
                     "name": "name",
                     "orig": "name",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
               "method": "GET",
               "orig": "/",
+              "parts": [],
               "select": {
                 "exist": [
                   "apikey",
@@ -132,12 +139,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
-              "parts": [],
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },

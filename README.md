@@ -1,21 +1,8 @@
 # Genderizeio SDK
 
-Predict the likely gender of a person from their first name, with a probability score
+Genderize.io client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Genderize.io
-
-[Genderize.io](https://genderize.io) is a name-to-gender prediction service operated by Demografix ApS, alongside its sister APIs [Agify.io](https://agify.io) (age estimation) and [Nationalize.io](https://nationalize.io) (nationality prediction). All three are backed by the same underlying name dataset.
-
-The service works by looking a first name up in a corpus of more than 1 billion people and returning the proportion of that name observed as male or female. A returned probability of 0.92 for `female` means 92% of the people with that name in the dataset are female.
-
-What you get from the API:
-- A single `GET` endpoint at `https://api.genderize.io` taking a `name` query parameter.
-- A predicted `gender` (`male` or `female`), a `probability` score, and a `count` of how many entries in the dataset matched the name.
-- Optional country-specific scoping — useful because, for example, "Kim" skews male in Denmark but female in the United States.
-
-The free tier permits 2,500 names per month without a credit card; higher volumes require a paid plan and API key. Keys are shared across the Demografix family of APIs.
 
 ## Try it
 
@@ -49,27 +36,31 @@ gem install genderizeio-sdk
 luarocks install genderizeio-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { GenderizeioSDK } from 'genderizeio'
 
-const client = new GenderizeioSDK({})
+const client = new GenderizeioSDK({
+  apikey: process.env.GENDERIZEIO_APIKEY,
+})
 
+// Load getgender data
+const getgender = await client.GetGender().load({})
+console.log(getgender.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -99,7 +90,7 @@ The API exposes one entity:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **GetGender** | Gender prediction for a first name, served by `GET https://api.genderize.io?name={name}`, returning `gender`, `probability`, and `count` fields. | `/` |
+| **GetGender** |  | `/` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -109,15 +100,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from genderizeio_sdk import GenderizeioSDK
 
-client = GenderizeioSDK({})
+client = GenderizeioSDK({
+    "apikey": os.environ.get("GENDERIZEIO_APIKEY"),
+})
 
 
 # Load a specific getgender
-getgender, err = client.GetGender(None).load(
-    {"id": "example_id"}, None
-)
+getgender, err = client.GetGender().load({"id": "example_id"})
+print(getgender)
 ```
 
 ### PHP
@@ -126,13 +119,14 @@ getgender, err = client.GetGender(None).load(
 <?php
 require_once 'genderizeio_sdk.php';
 
-$client = new GenderizeioSDK([]);
+$client = new GenderizeioSDK([
+    "apikey" => getenv("GENDERIZEIO_APIKEY"),
+]);
 
 
 // Load a specific getgender
-[$getgender, $err] = $client->GetGender(null)->load(
-    ["id" => "example_id"], null
-);
+[$getgender, $err] = $client->GetGender()->load(["id" => "example_id"]);
+print_r($getgender);
 ```
 
 ### Golang
@@ -140,8 +134,13 @@ $client = new GenderizeioSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/genderizeio-sdk/go"
 
-client := sdk.NewGenderizeioSDK(map[string]any{})
+client := sdk.NewGenderizeioSDK(map[string]any{
+    "apikey": os.Getenv("GENDERIZEIO_APIKEY"),
+})
 
+// Load getgender data
+getgender, err := client.GetGender(nil).Load(map[string]any{}, nil)
+fmt.Println(getgender)
 ```
 
 ### Ruby
@@ -149,13 +148,14 @@ client := sdk.NewGenderizeioSDK(map[string]any{})
 ```ruby
 require_relative "Genderizeio_sdk"
 
-client = GenderizeioSDK.new({})
+client = GenderizeioSDK.new({
+  "apikey" => ENV["GENDERIZEIO_APIKEY"],
+})
 
 
 # Load a specific getgender
-getgender, err = client.GetGender(nil).load(
-  { "id" => "example_id" }, nil
-)
+getgender, err = client.GetGender().load({ "id" => "example_id" })
+puts getgender
 ```
 
 ### Lua
@@ -163,13 +163,14 @@ getgender, err = client.GetGender(nil).load(
 ```lua
 local sdk = require("genderizeio_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("GENDERIZEIO_APIKEY"),
+})
 
 
 -- Load a specific getgender
-local getgender, err = client:GetGender(nil):load(
-  { id = "example_id" }, nil
-)
+local getgender, err = client:GetGender():load({ id = "example_id" })
+print(getgender)
 ```
 
 ## Unit testing in offline mode
@@ -188,25 +189,21 @@ const result = await client.GetGender().load({ id: 'test01' })
 ### Python
 
 ```python
-client = GenderizeioSDK.test(None, None)
-result, err = client.GetGender(None).load(
-    {"id": "test01"}, None
-)
+client = GenderizeioSDK.test()
+result, err = client.GetGender().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = GenderizeioSDK::test(null, null);
-[$result, $err] = $client->GetGender(null)->load(
-    ["id" => "test01"], null
-);
+$client = GenderizeioSDK::test();
+[$result, $err] = $client->GetGender()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.GetGender(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -215,19 +212,15 @@ result, err := client.GetGender(nil).Load(
 ### Ruby
 
 ```ruby
-client = GenderizeioSDK.test(nil, nil)
-result, err = client.GetGender(nil).load(
-  { "id" => "test01" }, nil
-)
+client = GenderizeioSDK.test
+result, err = client.GetGender().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:GetGender(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:GetGender():load({ id = "test01" })
 ```
 
 ## How it works
@@ -331,15 +324,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Genderize.io
-
-- Upstream: [https://genderize.io](https://genderize.io)
-
-- Free tier of 2,500 names/month, no credit card required.
-- Paid plans start at $20/month for higher request volumes.
-- An API key is shared across the Demografix family (Genderize, Agify, Nationalize).
-- Consult the official site for current terms of service.
 
 ---
 

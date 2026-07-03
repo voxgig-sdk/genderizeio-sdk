@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'GENDERIZEIO_TEST_GET_GENDER_ENTID': idmap,
     'GENDERIZEIO_TEST_LIVE': 'FALSE',
     'GENDERIZEIO_TEST_EXPLAIN': 'FALSE',
+    'GENDERIZEIO_APIKEY': 'NONE',
   })
 
   idmap = env['GENDERIZEIO_TEST_GET_GENDER_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new GenderizeioSDK(merge([
       {
+        apikey: env.GENDERIZEIO_APIKEY,
       },
       extra
     ]))
