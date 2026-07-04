@@ -220,25 +220,15 @@ class GenderizeioSDK:
         }
 
 
-    @property
-    def get_gender(self):
-        """Idiomatic facade: client.get_gender.list() / client.get_gender.load({"id": ...})."""
-        from entity.get_gender_entity import GetGenderEntity
-        cached = getattr(self, "_get_gender", None)
-        if cached is None:
-            cached = GetGenderEntity(self, None)
-            self._get_gender = cached
-        return cached
-
-    def GetGender(self, data=None):
-        # Deprecated: use client.get_gender instead.
+    def GetGender(self, data=None) -> "GetGenderEntity":
+        """Entity factory: client.GetGender().list({}) / client.GetGender().load({"id": ...})."""
         from entity.get_gender_entity import GetGenderEntity
         return GetGenderEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "GenderizeioSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -258,3 +248,9 @@ class GenderizeioSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.get_gender_entity import GetGenderEntity

@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:get_gender():list() / client:get_gender():load({ id = ... })
-function GenderizeioSDK:get_gender(data)
+-- Idiomatic facade: client:GetGender():list() / client:GetGender():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function GenderizeioSDK:GetGender(data)
   local EntityMod = require("entity.get_gender_entity")
   if data == nil then
     if self._get_gender == nil then
@@ -253,12 +254,6 @@ function GenderizeioSDK:get_gender(data)
     end
     return self._get_gender
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:get_gender() instead.
-function GenderizeioSDK:GetGender(data)
-  local EntityMod = require("entity.get_gender_entity")
   return EntityMod.new(self, data)
 end
 

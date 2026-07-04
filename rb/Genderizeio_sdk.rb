@@ -208,13 +208,7 @@ class GenderizeioSDK
   end
 
 
-  # Idiomatic facade: client.get_gender.list / client.get_gender.load({ "id" => ... })
-  def get_gender
-    require_relative 'entity/get_gender_entity'
-    @get_gender ||= GetGenderEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.get_gender instead.
+  # Canonical facade: client.GetGender.list / client.GetGender.load({ "id" => ... })
   def GetGender(data = nil)
     require_relative 'entity/get_gender_entity'
     GetGenderEntity.new(self, data)

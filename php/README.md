@@ -35,9 +35,10 @@ $client = new GenderizeioSDK([
 
 ```php
 try {
-    $result = $client->getgender()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare GetGender record (throws on error).
+    $getgender = $client->GetGender()->load(["id" => "example_id"]);
+    print_r($getgender);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -83,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = GenderizeioSDK::test();
+$client = GenderizeioSDK::test([
+    "entity" => ["getgender" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->getgender()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$getgender = $client->GetGender()->load(["id" => "test01"]);
+print_r($getgender);
 ```
 
 ### Use a custom fetch function
@@ -230,7 +235,7 @@ API path: `/`
 
 ### GetGender
 
-Create an instance: `const get_gender = client.get_gender`
+Create an instance: `$get_gender = $client->GetGender();`
 
 #### Operations
 
@@ -249,8 +254,9 @@ Create an instance: `const get_gender = client.get_gender`
 
 #### Example: Load
 
-```ts
-const get_gender = await client.get_gender.load({ id: 'get_gender_id' })
+```php
+// load() returns the bare GetGender record (throws on error).
+$get_gender = $client->GetGender()->load(["id" => "get_gender_id"]);
 ```
 
 
@@ -325,7 +331,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$getgender = $client->getgender();
+$getgender = $client->GetGender();
 $getgender->load(["id" => "example_id"]);
 
 // $getgender->dataGet() now returns the loaded getgender data

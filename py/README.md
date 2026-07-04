@@ -36,10 +36,12 @@ client = GenderizeioSDK({
 
 ### 3. Load a getgender
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.getgender.load({"id": "example_id"})
-    print(result)
+    getgender = client.GetGender().load({"id": "example_id"})
+    print(getgender)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -87,8 +89,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = GenderizeioSDK.test()
 
-result = client.getgender.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+getgender = client.GetGender().load({"id": "test01"})
+# getgender contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -226,7 +229,7 @@ API path: `/`
 
 ### GetGender
 
-Create an instance: `const get_gender = client.get_gender`
+Create an instance: `get_gender = client.GetGender()`
 
 #### Operations
 
@@ -245,8 +248,8 @@ Create an instance: `const get_gender = client.get_gender`
 
 #### Example: Load
 
-```ts
-const get_gender = await client.get_gender.load({ id: 'get_gender_id' })
+```python
+get_gender = client.GetGender().load({"id": "get_gender_id"})
 ```
 
 
@@ -320,7 +323,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-getgender = client.getgender
+getgender = client.GetGender()
 getgender.load({"id": "example_id"})
 
 # getgender.data_get() now returns the loaded getgender data

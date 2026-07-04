@@ -34,8 +34,9 @@ client = GenderizeioSDK.new({
 
 ```ruby
 begin
-  result = client.getgender.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare GetGender record (raises on error).
+  getgender = client.GetGender.load({ "id" => "example_id" })
+  puts getgender
 rescue => err
   warn "load failed: #{err}"
 end
@@ -82,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = GenderizeioSDK.test
+client = GenderizeioSDK.test({
+  "entity" => { "getgender" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.getgender.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+getgender = client.GetGender.load({ "id" => "test01" })
+puts getgender
 ```
 
 ### Use a custom fetch function
@@ -225,7 +230,7 @@ API path: `/`
 
 ### GetGender
 
-Create an instance: `const get_gender = client.get_gender`
+Create an instance: `get_gender = client.GetGender`
 
 #### Operations
 
@@ -244,8 +249,9 @@ Create an instance: `const get_gender = client.get_gender`
 
 #### Example: Load
 
-```ts
-const get_gender = await client.get_gender.load({ id: 'get_gender_id' })
+```ruby
+# load returns the bare GetGender record (raises on error).
+get_gender = client.GetGender.load({ "id" => "get_gender_id" })
 ```
 
 
@@ -320,7 +326,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-getgender = client.getgender
+getgender = client.GetGender
 getgender.load({ "id" => "example_id" })
 
 # getgender.data_get now returns the loaded getgender data

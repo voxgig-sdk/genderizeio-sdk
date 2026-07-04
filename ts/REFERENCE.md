@@ -110,7 +110,7 @@ Alias for `GenderizeioSDK.test()`.
 ## GetGenderEntity
 
 ```ts
-const get_gender = client.get_gender
+const get_gender = client.GetGender()
 ```
 
 ### Fields
@@ -129,7 +129,7 @@ const get_gender = client.get_gender
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.get_gender.load({ id: 'get_gender_id' })
+const result = await client.GetGender().load({ id: 'get_gender_id' })
 ```
 
 ### Common Methods

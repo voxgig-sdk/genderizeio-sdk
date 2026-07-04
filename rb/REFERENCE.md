@@ -87,7 +87,7 @@ same parameters as `direct()`. Raises on error.
 ## GetGenderEntity
 
 ```ruby
-get_gender = client.get_gender
+get_gender = client.GetGender
 ```
 
 ### Fields
@@ -106,7 +106,7 @@ get_gender = client.get_gender
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.get_gender.load({ "id" => "get_gender_id" })
+result = client.GetGender.load({ "id" => "get_gender_id" })
 ```
 
 ### Common Methods

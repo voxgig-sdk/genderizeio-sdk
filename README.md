@@ -28,9 +28,9 @@ const client = new GenderizeioSDK({
   apikey: process.env.GENDERIZEIO_APIKEY,
 })
 
-// Load getgender data
-const getgender = await client.getgender.load({})
-console.log(getgender.data)
+// Load getgender data (returns a GetGender)
+const getgender = await client.GetGender().load()
+console.log(getgender)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -89,8 +89,8 @@ client = GenderizeioSDK({
 })
 
 
-# Load a specific getgender
-getgender = client.getgender.load({"id": "example_id"})
+# Load a specific getgender (returns the record, raises on error)
+getgender = client.GetGender().load({"id": "example_id"})
 print(getgender)
 ```
 
@@ -105,8 +105,8 @@ $client = new GenderizeioSDK([
 ]);
 
 
-// Load a specific getgender
-$getgender = $client->getgender()->load(["id" => "example_id"]);
+// Load a specific getgender (returns the bare record; throws on error)
+$getgender = $client->GetGender()->load(["id" => "example_id"]);
 print_r($getgender);
 ```
 
@@ -134,8 +134,8 @@ client = GenderizeioSDK.new({
 })
 
 
-# Load a specific getgender
-getgender = client.getgender.load({ "id" => "example_id" })
+# Load a specific getgender (returns the bare record; raises on error)
+getgender = client.GetGender.load({ "id" => "example_id" })
 puts getgender
 ```
 
@@ -150,7 +150,7 @@ local client = sdk.new({
 
 
 -- Load a specific getgender
-local getgender, err = client:getgender():load({ id = "example_id" })
+local getgender, err = client:GetGender():load({ id = "example_id" })
 print(getgender)
 ```
 
@@ -163,22 +163,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = GenderizeioSDK.test()
-const result = await client.getgender.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const getgender = await client.GetGender().load({ id: 'test01' })
+// getgender is a bare GetGender populated with mock data
+console.log(getgender)
 ```
 
 ### Python
 
 ```python
 client = GenderizeioSDK.test()
-result = client.getgender.load({"id": "test01"})
+getgender = client.GetGender().load({"id": "test01"})
+print(getgender)
 ```
 
 ### PHP
 
 ```php
-$client = GenderizeioSDK::test();
-$result = $client->getgender()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = GenderizeioSDK::test([
+    "entity" => ["getgender" => ["test01" => ["id" => "test01"]]],
+]);
+$getgender = $client->GetGender()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -193,15 +198,18 @@ result, err := client.GetGender(nil).Load(
 ### Ruby
 
 ```ruby
-client = GenderizeioSDK.test
-result = client.getgender.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = GenderizeioSDK.test({
+  "entity" => { "getgender" => { "test01" => { "id" => "test01" } } },
+})
+getgender = client.GetGender.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:getgender():load({ id = "test01" })
+local result, err = client:GetGender():load({ id = "test01" })
 ```
 
 ## How it works
@@ -249,6 +257,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

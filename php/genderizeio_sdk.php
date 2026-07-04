@@ -233,10 +233,10 @@ class GenderizeioSDK
 
     private $_get_gender = null;
 
-    // Idiomatic facade: $client->get_gender()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias GetGender() (PHP method
-    // names are case-insensitive).
-    public function get_gender($data = null)
+    // Canonical facade: $client->GetGender()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->get_gender()
+    // resolves here too.
+    public function GetGender($data = null)
     {
         require_once __DIR__ . '/entity/get_gender_entity.php';
         if ($data === null) {

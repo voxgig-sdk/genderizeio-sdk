@@ -84,7 +84,7 @@ same parameters as `direct()`.
 ## GetGenderEntity
 
 ```lua
-local get_gender = client:get_gender(nil)
+local get_gender = client:GetGender(nil)
 ```
 
 ### Fields
@@ -103,7 +103,7 @@ local get_gender = client:get_gender(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:get_gender():load({ id = "get_gender_id" })
+local result, err = client:GetGender():load({ id = "get_gender_id" })
 ```
 
 ### Common Methods
