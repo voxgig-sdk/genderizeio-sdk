@@ -85,6 +85,27 @@ func (e *GetGenderEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an GetGender; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *GetGenderEntity) DataTyped(data ...GetGender) GetGender {
+	if len(data) > 0 {
+		return typedFrom[GetGender](e.Data(asMap(data[0])))
+	}
+	return typedFrom[GetGender](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through GetGender (all fields
+// optional at the wire level).
+func (e *GetGenderEntity) MatchTyped(match ...GetGender) GetGender {
+	if len(match) > 0 {
+		return typedFrom[GetGender](e.Match(asMap(match[0])))
+	}
+	return typedFrom[GetGender](e.Match())
+}
+
 
 func (e *GetGenderEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *GetGenderEntity) Load(reqmatch map[string]any, ctrl map[string]any) (an
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// GetGenderLoadMatch and returns an GetGender. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *GetGenderEntity) LoadTyped(reqmatch GetGenderLoadMatch, ctrl map[string]any) (GetGender, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return GetGender{}, err
+	}
+	return typedFrom[GetGender](res), nil
 }
 
 

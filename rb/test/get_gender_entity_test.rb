@@ -42,8 +42,7 @@ class GetGenderEntityTest < Minitest::Test
     # LOAD
     get_gender_ref01_ent = client.GetGender(nil)
     get_gender_ref01_match_dt0 = {}
-    get_gender_ref01_data_dt0_loaded, err = get_gender_ref01_ent.load(get_gender_ref01_match_dt0, nil)
-    assert_nil err
+    get_gender_ref01_data_dt0_loaded = get_gender_ref01_ent.load(get_gender_ref01_match_dt0, nil)
     assert !get_gender_ref01_data_dt0_loaded.nil?
 
   end

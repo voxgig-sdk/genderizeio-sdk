@@ -2,6 +2,8 @@
 
 import { GetGenderEntity } from './entity/GetGenderEntity'
 
+export type * from './GenderizeioTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -202,6 +204,14 @@ class GenderizeioSDK {
 
 
 
+  _get_gender?: GetGenderEntity
+
+  // Idiomatic facade: `client.get_gender.list()` / `client.get_gender.load({ id })`.
+  get get_gender(): GetGenderEntity {
+    return (this._get_gender ??= new GetGenderEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.get_gender` instead. */
   GetGender(data?: any) {
     const self = this
     return new GetGenderEntity(self,data)

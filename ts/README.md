@@ -9,9 +9,12 @@ The TypeScript SDK for the Genderizeio API — a type-safe, entity-oriented clie
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/genderizeio
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/genderizeio-sdk/releases](https://github.com/voxgig-sdk/genderizeio-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,7 +23,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { GenderizeioSDK } from 'genderizeio'
+import { GenderizeioSDK } from '@voxgig-sdk/genderizeio'
 
 const client = new GenderizeioSDK({
   apikey: process.env.GENDERIZEIO_APIKEY,
@@ -30,7 +33,7 @@ const client = new GenderizeioSDK({
 ### 3. Load a getgender
 
 ```ts
-const result = await client.GetGender().load({ id: 'example_id' })
+const result = await client.getgender.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = GenderizeioSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.getgender.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -96,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.getgender
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -269,7 +272,7 @@ API path: `/`
 
 ### GetGender
 
-Create an instance: `const get_gender = client.GetGender()`
+Create an instance: `const get_gender = client.get_gender`
 
 #### Operations
 
@@ -289,7 +292,7 @@ Create an instance: `const get_gender = client.GetGender()`
 #### Example: Load
 
 ```ts
-const get_gender = await client.GetGender().load({ id: 'get_gender_id' })
+const get_gender = await client.get_gender.load({ id: 'get_gender_id' })
 ```
 
 
@@ -350,7 +353,7 @@ genderizeio/
 Import the SDK from the package root:
 
 ```ts
-import { GenderizeioSDK } from 'genderizeio'
+import { GenderizeioSDK } from '@voxgig-sdk/genderizeio'
 ```
 
 ### Entity state
@@ -360,11 +363,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const getgender = client.getgender
+await getgender.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// getgender.data() now returns the loaded getgender data
+// getgender.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

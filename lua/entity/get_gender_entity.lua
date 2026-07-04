@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch GetGenderLoadMatch
+---@param ctrl? table
+---@return GetGender
+---@return string? err
 function GetGenderEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

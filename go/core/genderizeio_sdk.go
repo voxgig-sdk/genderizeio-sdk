@@ -245,6 +245,9 @@ func (sdk *GenderizeioSDK) Direct(fetchargs map[string]any) (map[string]any, err
 }
 
 
+// GetGender returns a GetGender entity bound to this client.
+// Idiomatic usage: client.GetGender(nil).List(nil, nil) or
+// client.GetGender(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *GenderizeioSDK) GetGender(data map[string]any) GenderizeioEntity {
 	return NewGetGenderEntityFunc(sdk, data)
 }

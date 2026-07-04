@@ -49,8 +49,7 @@ class GetGenderEntityTest extends TestCase
         // LOAD
         $get_gender_ref01_ent = $client->GetGender(null);
         $get_gender_ref01_match_dt0 = [];
-        [$get_gender_ref01_data_dt0_loaded, $err] = $get_gender_ref01_ent->load($get_gender_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $get_gender_ref01_data_dt0_loaded = $get_gender_ref01_ent->load($get_gender_ref01_match_dt0, null);
         $this->assertNotNull($get_gender_ref01_data_dt0_loaded);
 
     }

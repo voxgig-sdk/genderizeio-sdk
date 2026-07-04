@@ -49,8 +49,7 @@ class TestGetGenderEntity:
         # LOAD
         get_gender_ref01_ent = client.GetGender(None)
         get_gender_ref01_match_dt0 = {}
-        get_gender_ref01_data_dt0_loaded, err = get_gender_ref01_ent.load(get_gender_ref01_match_dt0, None)
-        assert err is None
+        get_gender_ref01_data_dt0_loaded = get_gender_ref01_ent.load(get_gender_ref01_match_dt0, None)
         assert get_gender_ref01_data_dt0_loaded is not None
 
 

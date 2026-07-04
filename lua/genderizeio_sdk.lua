@@ -244,6 +244,19 @@ end
 
 
 
+-- Idiomatic facade: client:get_gender():list() / client:get_gender():load({ id = ... })
+function GenderizeioSDK:get_gender(data)
+  local EntityMod = require("entity.get_gender_entity")
+  if data == nil then
+    if self._get_gender == nil then
+      self._get_gender = EntityMod.new(self, nil)
+    end
+    return self._get_gender
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:get_gender() instead.
 function GenderizeioSDK:GetGender(data)
   local EntityMod = require("entity.get_gender_entity")
   return EntityMod.new(self, data)
