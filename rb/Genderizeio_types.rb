@@ -29,7 +29,7 @@ GetGender = Struct.new(
   keyword_init: true
 )
 
-# Match filter for GetGender#load (any subset of GetGender fields).
+# Request payload for GetGender#load.
 #
 # @!attribute [rw] count
 #   @return [Integer, nil]

@@ -21,7 +21,7 @@ class GetGender
     public ?float $probability = null;
 }
 
-/** Match filter for GetGender#load (any subset of GetGender fields). */
+/** Request payload for GetGender#load. */
 class GetGenderLoadMatch
 {
     public ?int $count = null;

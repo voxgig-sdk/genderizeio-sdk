@@ -98,10 +98,10 @@ get_gender := client.GetGender(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `count` | ``$INTEGER`` | No |  |
-| `gender` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `probability` | ``$NUMBER`` | No |  |
+| `count` | `int` | No |  |
+| `gender` | `string` | No |  |
+| `name` | `string` | No |  |
+| `probability` | `float64` | No |  |
 
 ### Operations
 
@@ -110,7 +110,7 @@ get_gender := client.GetGender(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.GetGender(nil).Load(map[string]any{"id": "get_gender_id"}, nil)
+result, err := client.GetGender(nil).Load(nil, nil)
 ```
 
 ### Common Methods

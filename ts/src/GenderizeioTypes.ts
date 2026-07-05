@@ -12,5 +12,10 @@ export interface GetGender {
   probability?: number
 }
 
-export type GetGenderLoadMatch = Partial<GetGender>
+export interface GetGenderLoadMatch {
+  count?: number
+  gender?: string
+  name?: string
+  probability?: number
+}
 

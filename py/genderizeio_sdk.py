@@ -221,7 +221,7 @@ class GenderizeioSDK:
 
 
     def GetGender(self, data=None) -> "GetGenderEntity":
-        """Entity factory: client.GetGender().list({}) / client.GetGender().load({"id": ...})."""
+        """Entity factory: client.GetGender().list() / client.GetGender().load({"id": ...})."""
         from entity.get_gender_entity import GetGenderEntity
         return GetGenderEntity(self, data)
 

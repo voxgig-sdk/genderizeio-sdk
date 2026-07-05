@@ -16,8 +16,7 @@ type GetGender struct {
 	Probability *float64 `json:"probability,omitempty"`
 }
 
-// GetGenderLoadMatch mirrors the get_gender fields as an all-optional match
-// filter (Go analog of Partial<GetGender>).
+// GetGenderLoadMatch is the typed request payload for GetGender.LoadTyped.
 type GetGenderLoadMatch struct {
 	Count *int `json:"count,omitempty"`
 	Gender *string `json:"gender,omitempty"`

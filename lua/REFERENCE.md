@@ -91,10 +91,10 @@ local get_gender = client:GetGender(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `count` | ``$INTEGER`` | No |  |
-| `gender` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `probability` | ``$NUMBER`` | No |  |
+| `count` | `number` | No |  |
+| `gender` | `string` | No |  |
+| `name` | `string` | No |  |
+| `probability` | `number` | No |  |
 
 ### Operations
 
@@ -103,7 +103,7 @@ local get_gender = client:GetGender(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:GetGender():load({ id = "get_gender_id" })
+local result, err = client:GetGender():load()
 ```
 
 ### Common Methods

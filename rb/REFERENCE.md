@@ -8,7 +8,7 @@ Complete API reference for the Genderizeio Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'genderizeio_sdk'
+require_relative 'Genderizeio_sdk'
 
 client = GenderizeioSDK.new(options)
 ```
@@ -94,10 +94,10 @@ get_gender = client.GetGender
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `count` | ``$INTEGER`` | No |  |
-| `gender` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `probability` | ``$NUMBER`` | No |  |
+| `count` | `Integer` | No |  |
+| `gender` | `String` | No |  |
+| `name` | `String` | No |  |
+| `probability` | `Float` | No |  |
 
 ### Operations
 
@@ -106,7 +106,7 @@ get_gender = client.GetGender
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.GetGender.load({ "id" => "get_gender_id" })
+result = client.GetGender.load()
 ```
 
 ### Common Methods

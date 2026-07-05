@@ -88,10 +88,10 @@ get_gender = client.GetGender()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `count` | ``$INTEGER`` | No |  |
-| `gender` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `probability` | ``$NUMBER`` | No |  |
+| `count` | `int` | No |  |
+| `gender` | `str` | No |  |
+| `name` | `str` | No |  |
+| `probability` | `float` | No |  |
 
 ### Operations
 
@@ -100,7 +100,7 @@ get_gender = client.GetGender()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.GetGender().load({"id": "get_gender_id"})
+result = client.GetGender().load()
 ```
 
 ### Common Methods

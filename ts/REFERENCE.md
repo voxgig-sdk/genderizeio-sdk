@@ -117,10 +117,10 @@ const get_gender = client.GetGender()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `count` | ``$INTEGER`` | No |  |
-| `gender` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `probability` | ``$NUMBER`` | No |  |
+| `count` | `number` | No |  |
+| `gender` | `string` | No |  |
+| `name` | `string` | No |  |
+| `probability` | `number` | No |  |
 
 ### Operations
 
@@ -129,7 +129,7 @@ const get_gender = client.GetGender()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.GetGender().load({ id: 'get_gender_id' })
+const result = await client.GetGender().load()
 ```
 
 ### Common Methods
