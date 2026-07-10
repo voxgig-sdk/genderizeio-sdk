@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -245,15 +242,25 @@
           "url": "https://genderize.io/"
         },
         "description": "A simple API that predicts the gender of a person based on a first name. Genderize uses statistical analysis of over 1 billion names to determine the likely gender associated with a given first name. The API supports localization by country and handles names from different cultural backgrounds.",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "query",
+          "name": "apikey",
+          "prefix": "",
+          "scheme": "ApiKeyAuth",
+          "type": "apiKey"
+        },
         "servers": [
           {
             "description": "Production server",
             "url": "https://api.genderize.io"
           }
         ],
+        "summary": "A simple API that predicts the gender of a person based on a first name.",
         "termsOfService": "https://genderize.io/",
         "title": "Genderize.io",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://genderize.io/"
       },
       "option": {},
       "target": {
@@ -306,6 +313,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -356,6 +366,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

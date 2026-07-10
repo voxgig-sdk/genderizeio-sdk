@@ -53,12 +53,12 @@ func main() {
         "apikey": os.Getenv("GENDERIZEIO_APIKEY"),
     })
 
-    // Load a single getgender — the value is the loaded record.
-    getgender, err := client.GetGender(nil).Load(nil, nil)
+    // Load a single getGender — the value is the loaded record.
+    getGender, err := client.GetGender(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(getgender)
+    fmt.Println(getGender)
 }
 ```
 
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-getgender, err := client.GetGender(nil).Load(
+getGender, err := client.GetGender(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(getgender) // the returned mock data
+fmt.Println(getGender) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -250,9 +250,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    getgender, err := client.GetGender(nil).Load(nil, nil)
+    getGender, err := client.GetGender(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // getgender is the returned record
+    // getGender is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -279,7 +279,7 @@ API path: `/`
 
 ### GetGender
 
-Create an instance: `get_gender := client.GetGender(nil)`
+Create an instance: `getGender := client.GetGender(nil)`
 
 #### Operations
 
@@ -299,11 +299,11 @@ Create an instance: `get_gender := client.GetGender(nil)`
 #### Example: Load
 
 ```go
-get_gender, err := client.GetGender(nil).Load(nil, nil)
+getGender, err := client.GetGender(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(get_gender) // the loaded record
+fmt.Println(getGender) // the loaded record
 ```
 
 

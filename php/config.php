@@ -21,7 +21,7 @@ class GenderizeioConfig
             "options" => [
                 "base" => "https://api.genderize.io",
                 "auth" => [
-                    "prefix" => "Bearer",
+                    "prefix" => "",
                 ],
                 "headers" => [
           'content-type' => 'application/json',

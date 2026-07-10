@@ -39,7 +39,7 @@ class Config {
     base: 'https://api.genderize.io',
 
     auth: {
-      prefix: 'Bearer',
+      prefix: '',
     },
 
     headers: {

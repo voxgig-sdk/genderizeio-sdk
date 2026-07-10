@@ -91,7 +91,8 @@ same parameters as `Direct()`.
 ## GetGenderEntity
 
 ```go
-get_gender := client.GetGender(nil)
+getGender := client.GetGender(nil)
+fmt.Println(getGender.GetName()) // "get_gender"
 ```
 
 ### Fields
@@ -111,6 +112,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.GetGender(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
