@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Genderizeio SDK exists test
 
 local sdk = require("genderizeio_sdk")
 
