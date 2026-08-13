@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Genderizeio SDK exists test
 
 import pytest
 from genderizeio_sdk import GenderizeioSDK

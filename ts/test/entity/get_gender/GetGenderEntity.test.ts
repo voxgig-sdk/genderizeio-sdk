@@ -62,7 +62,7 @@ describe('GetGenderEntity', async () => {
     // LOAD
     const get_gender_ref01_ent = client.GetGender()
     const get_gender_ref01_match_dt0: any = {}
-    const get_gender_ref01_data_dt0 = await get_gender_ref01_ent.load(get_gender_ref01_match_dt0)
+    const get_gender_ref01_data_dt0 = (await get_gender_ref01_ent.load(get_gender_ref01_match_dt0)).data()
     assert(null != get_gender_ref01_data_dt0)
 
 

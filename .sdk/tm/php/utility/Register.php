@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ GenderizeioUtility::setRegistrar(function (GenderizeioUtility $u): void {
     $u->prepare_params = [GenderizeioPrepareParams::class, 'call'];
     $u->prepare_path = [GenderizeioPreparePath::class, 'call'];
     $u->prepare_query = [GenderizeioPrepareQuery::class, 'call'];
+    $u->graphql_body = [GenderizeioGraphql::class, 'body'];
+    $u->graphql_errors = [GenderizeioGraphql::class, 'errors'];
     $u->result_basic = [GenderizeioResultBasic::class, 'call'];
     $u->result_body = [GenderizeioResultBody::class, 'call'];
     $u->result_headers = [GenderizeioResultHeaders::class, 'call'];

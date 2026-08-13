@@ -123,7 +123,8 @@ Create a mock client for unit testing — no server required:
 const client = GenderizeioSDK.test()
 
 const getgender = await client.GetGender().load()
-// getgender is a bare entity populated with mock response data
+// getgender is the entity, populated with mock response data
+// — call getgender.data() for the record itself
 console.log(getgender)
 ```
 

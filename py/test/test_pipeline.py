@@ -16,11 +16,11 @@
 import pytest
 
 from genderizeio_sdk import GenderizeioSDK
-from core.error import GenderizeioError
-from core.result import GenderizeioResult
-from core.response import GenderizeioResponse
-from core.spec import GenderizeioSpec
-from feature.base_feature import GenderizeioBaseFeature
+from genderizeio_sdk.core.error import GenderizeioError
+from genderizeio_sdk.core.result import GenderizeioResult
+from genderizeio_sdk.core.response import GenderizeioResponse
+from genderizeio_sdk.core.spec import GenderizeioSpec
+from genderizeio_sdk.feature.base_feature import GenderizeioBaseFeature
 
 
 def _client():

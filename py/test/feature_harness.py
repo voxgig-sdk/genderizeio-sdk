@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import GenderizeioControl
-from core.error import GenderizeioError
-from core.result import GenderizeioResult
-from core.spec import GenderizeioSpec
+from genderizeio_sdk.config import make_config
+from genderizeio_sdk.features import _make_feature
+from genderizeio_sdk.core.control import GenderizeioControl
+from genderizeio_sdk.core.error import GenderizeioError
+from genderizeio_sdk.core.result import GenderizeioResult
+from genderizeio_sdk.core.spec import GenderizeioSpec
 
 
 # True when this SDK was generated with the named feature.

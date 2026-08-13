@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from genderizeio_sdk.utility.voxgig_struct import voxgig_struct as vs
 from genderizeio_sdk import GenderizeioSDK
-from core import helpers
+from genderizeio_sdk.core import helpers
 from test import runner
 
 

@@ -36,7 +36,7 @@ client = GenderizeioSDK.new({
 
 ```ruby
 begin
-  # load returns the bare GetGender record (raises on error).
+  # load returns the ENTITY — call data_get for the GetGender record (raises on error).
   getgender = client.GetGender.load()
   puts getgender
 rescue => err
@@ -119,7 +119,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = GenderizeioSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 getgender = client.GetGender.load()
 puts getgender
 ```
@@ -274,7 +275,7 @@ Create an instance: `get_gender = client.GetGender`
 #### Example: Load
 
 ```ruby
-# load returns the bare GetGender record (raises on error).
+# load returns the ENTITY — call data_get for the GetGender record (raises on error).
 get_gender = client.GetGender.load()
 ```
 

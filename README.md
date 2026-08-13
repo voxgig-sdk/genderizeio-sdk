@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = GenderizeioSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = GenderizeioSDK.test({
+  entity: {
+    get_gender: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const getgender = await client.GetGender().load()
-// getgender is a bare GetGender populated with mock data
+// getgender is the GetGender entity, populated with mock data
+// — call getgender.data() for the record itself
 console.log(getgender)
 ```
 
@@ -189,7 +198,7 @@ $client = new GenderizeioSDK([
 ]);
 
 
-// Load a specific getgender (returns the bare record; throws on error)
+// Load a specific getgender (returns the ENTITY; call data_get() for the record; throws on error)
 $getgender = $client->GetGender()->load();
 print_r($getgender);
 ```
@@ -221,7 +230,7 @@ client = GenderizeioSDK.new({
 })
 
 
-# Load a specific getgender (returns the bare record; raises on error)
+# Load a specific getgender (returns the ENTITY; call data_get for the record)
 getgender = client.GetGender.load()
 puts getgender
 ```
@@ -357,6 +366,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://genderize.io/](https://genderize.io/)
 
