@@ -40,7 +40,7 @@ class GenderizeioSDK
         $utility = new GenderizeioUtility();
         $this->_utility = $utility;
 
-        $config = GenderizeioConfig::make_config();
+        $config = GenderizeioConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

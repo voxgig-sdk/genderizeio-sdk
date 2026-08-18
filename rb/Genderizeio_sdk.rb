@@ -28,7 +28,7 @@ class GenderizeioSDK
     utility = GenderizeioUtility.new
     @_utility = utility
 
-    config = GenderizeioConfig.make_config
+    config = GenderizeioConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
