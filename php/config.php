@@ -33,6 +33,9 @@ class GenderizeioConfig
         return [
             "main" => [
                 "name" => "Genderizeio",
+                "slug" => "genderizeio",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
