@@ -28,6 +28,7 @@ module GenderizeioConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
