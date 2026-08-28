@@ -38,7 +38,7 @@ $client = new GenderizeioSDK([
 ```php
 try {
     // load() returns the ENTITY — call data_get() for the GetGender record (throws on error).
-    $getgender = $client->GetGender()->load();
+    $getgender = $client->GetGender()->load(["name" => "example_name"]);
     print_r($getgender);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $getgender = $client->GetGender()->load();
+    $getgender = $client->GetGender()->load(["name" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -127,7 +127,7 @@ $client = GenderizeioSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$getgender = $client->GetGender()->load();
+$getgender = $client->GetGender()->load(["name" => "example"]);
 print_r($getgender);
 ```
 
@@ -286,8 +286,31 @@ Create an instance: `$get_gender = $client->GetGender();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the GetGender record (throws on error).
-$get_gender = $client->GetGender()->load();
+$get_gender = $client->GetGender()->load(["name" => "name"]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -367,7 +390,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $getgender = $client->GetGender();
-$getgender->load();
+$getgender->load(["name" => "example"]);
 
 // $getgender->data_get() now returns the getgender data from the last load
 // $getgender->match_get() returns the last match criteria

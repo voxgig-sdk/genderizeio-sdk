@@ -31,22 +31,18 @@ GetGender = Struct.new(
 
 # Request payload for GetGender#load.
 #
-# @!attribute [rw] count
-#   @return [Integer, nil]
+# @!attribute [rw] apikey
+#   @return [String, nil]
 #
-# @!attribute [rw] gender
+# @!attribute [rw] country_id
 #   @return [String, nil]
 #
 # @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] probability
-#   @return [Float, nil]
+#   @return [String]
 GetGenderLoadMatch = Struct.new(
-  :count,
-  :gender,
+  :apikey,
+  :country_id,
   :name,
-  :probability,
   keyword_init: true
 )
 

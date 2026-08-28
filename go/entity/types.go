@@ -22,10 +22,9 @@ type GetGender struct {
 
 // GetGenderLoadMatch is the typed request payload for GetGender.LoadTyped.
 type GetGenderLoadMatch struct {
-	Count *int `json:"count,omitempty"`
-	Gender *string `json:"gender,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Probability *float64 `json:"probability,omitempty"`
+	Apikey *string `json:"apikey,omitempty"`
+	CountryId *string `json:"country_id,omitempty"`
+	Name string `json:"name"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

@@ -13,9 +13,8 @@ export interface GetGender {
 }
 
 export interface GetGenderLoadMatch {
-  count?: number
-  gender?: string
-  name?: string
-  probability?: number
+  apikey?: string
+  country_id?: string
+  name: string
 }
 

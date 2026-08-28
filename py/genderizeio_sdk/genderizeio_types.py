@@ -23,8 +23,10 @@ class GetGender(TypedDict, total=False):
     probability: float
 
 
-class GetGenderLoadMatch(TypedDict, total=False):
-    count: int
-    gender: str
+class GetGenderLoadMatchRequired(TypedDict):
     name: str
-    probability: float
+
+
+class GetGenderLoadMatch(GetGenderLoadMatchRequired, total=False):
+    apikey: str
+    country_id: str

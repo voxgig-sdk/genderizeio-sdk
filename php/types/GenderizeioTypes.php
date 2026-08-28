@@ -24,9 +24,8 @@ class GetGender
 /** Request payload for GetGender#load. */
 class GetGenderLoadMatch
 {
-    public ?int $count = null;
-    public ?string $gender = null;
-    public ?string $name = null;
-    public ?float $probability = null;
+    public ?string $apikey = null;
+    public ?string $country_id = null;
+    public string $name;
 }
 

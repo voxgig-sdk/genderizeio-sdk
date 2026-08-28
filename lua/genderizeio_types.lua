@@ -13,10 +13,9 @@
 ---@field probability? number
 
 ---@class GetGenderLoadMatch
----@field count? number
----@field gender? string
----@field name? string
----@field probability? number
+---@field apikey? string
+---@field country_id? string
+---@field name string
 
 local M = {}
 
