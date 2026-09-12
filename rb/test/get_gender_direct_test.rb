@@ -67,15 +67,17 @@ def get_gender_direct_setup(mockres)
   env = Runner.env_override({
     "GENDERIZEIO_TEST_GET_GENDER_ENTID" => {},
     "GENDERIZEIO_TEST_LIVE" => "FALSE",
-    "GENDERIZEIO_APIKEY" => "NONE",
+    "GENDERIZEIO_APIKEY" => "",
   })
 
   live = env["GENDERIZEIO_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["GENDERIZEIO_APIKEY"],
-    }
+    })
     client = GenderizeioSDK.new(merged_opts)
     return {
       client: client,

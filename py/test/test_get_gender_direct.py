@@ -63,15 +63,18 @@ def _get_gender_direct_setup(mockres):
     env = runner.env_override({
         "GENDERIZEIO_TEST_GET_GENDER_ENTID": {},
         "GENDERIZEIO_TEST_LIVE": "FALSE",
-        "GENDERIZEIO_APIKEY": "NONE",
+        "GENDERIZEIO_APIKEY": "",
     })
 
     live = env.get("GENDERIZEIO_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("GENDERIZEIO_APIKEY"),
-        }
+        })
         client = GenderizeioSDK(merged_opts)
         return {
             "client": client,

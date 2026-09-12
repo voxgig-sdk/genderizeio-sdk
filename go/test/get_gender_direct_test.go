@@ -106,14 +106,22 @@ func get_genderDirectSetup(mockres any) *get_genderDirectSetupResult {
 	env := envOverride(map[string]any{
 		"GENDERIZEIO_TEST_GET_GENDER_ENTID": map[string]any{},
 		"GENDERIZEIO_TEST_LIVE":    "FALSE",
-		"GENDERIZEIO_APIKEY":       "NONE",
+		"GENDERIZEIO_APIKEY":       "",
 	})
 
 	live := env["GENDERIZEIO_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["GENDERIZEIO_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewGenderizeioSDK(mergedOpts)
 
