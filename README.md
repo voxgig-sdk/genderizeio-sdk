@@ -105,7 +105,7 @@ local result, err = client:GetGender():load({ name = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
+| TypeScript | `@voxgig-sdk/genderizeio-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
 | Python | `voxgig-sdk-genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
 | PHP | `voxgig-sdk/genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/genderizeio-sdk/go` | `go get github.com/voxgig-sdk/genderizeio-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:GetGender():load({ name = "example" })
 ### TypeScript
 
 ```ts
-import { GenderizeioSDK } from '@voxgig-sdk/genderizeio'
+import { GenderizeioSDK } from '@voxgig-sdk/genderizeio-sdk'
 
 const client = new GenderizeioSDK({
   apikey: process.env.GENDERIZEIO_APIKEY,

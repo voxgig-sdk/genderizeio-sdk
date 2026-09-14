@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { GenderizeioSDK } from '@voxgig-sdk/genderizeio'
+import { GenderizeioSDK } from '@voxgig-sdk/genderizeio-sdk'
 
 const client = new GenderizeioSDK({
   apikey: process.env.GENDERIZEIO_APIKEY,
@@ -413,7 +413,7 @@ genderizeio/
 Import the SDK from the package root:
 
 ```ts
-import { GenderizeioSDK } from '@voxgig-sdk/genderizeio'
+import { GenderizeioSDK } from '@voxgig-sdk/genderizeio-sdk'
 ```
 
 ### Entity state
