@@ -1,12 +1,18 @@
 # Genderizeio SDK feature factory
 
 from genderizeio_sdk.feature.base_feature import GenderizeioBaseFeature
+from genderizeio_sdk.feature.ratelimit_feature import GenderizeioRatelimitFeature
+from genderizeio_sdk.feature.retry_feature import GenderizeioRetryFeature
 from genderizeio_sdk.feature.test_feature import GenderizeioTestFeature
+from genderizeio_sdk.feature.timeout_feature import GenderizeioTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: GenderizeioBaseFeature(),
+    "ratelimit": lambda: GenderizeioRatelimitFeature(),
+    "retry": lambda: GenderizeioRetryFeature(),
     "test": lambda: GenderizeioTestFeature(),
+    "timeout": lambda: GenderizeioTimeoutFeature(),
 }
 
 

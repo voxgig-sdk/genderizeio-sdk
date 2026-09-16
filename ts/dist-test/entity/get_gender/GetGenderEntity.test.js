@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.GENDERIZEIO_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'get_gender.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'get_gender.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set GENDERIZEIO_TEST_GET_GENDER_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "count", "req": false, "type": "`$INTEGER`", "index$": 0 }, { "active": true, "name": "gender", "req": false, "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "name", "req": false, "type": "`$STRING`", "index$": 2 }, { "active": true, "name": "probability", "req": false, "type": "`$NUMBER`", "index$": 3 }], "name": "get_gender", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "query": [{ "active": true, "kind": "query", "name": "apikey", "orig": "apikey", "reqd": false, "type": "`$STRING`", "index$": 0 }, { "active": true, "example": "US", "kind": "query", "name": "country_id", "orig": "country_id", "reqd": false, "type": "`$STRING`", "index$": 1 }, { "active": true, "example": "peter", "kind": "query", "name": "name", "orig": "name", "reqd": true, "type": "`$STRING`", "index$": 2 }] }, "contract": { "id": "GET /", "json": "{\"operationId\":\"getGender\",\"parameters\":[{\"description\":\"First name to predict gender for. Can be provided multiple times for batch requests (e.g., name=peter&name=lois). Supports diacritics and non-latin alphabets.\",\"example\":\"peter\",\"in\":\"query\",\"name\":\"name\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"ISO 3166-1 alpha-2 country code to localize the prediction (e.g., US, GB, FR). Improves accuracy by scoping to specific cultural naming conventions.\",\"example\":\"US\",\"in\":\"query\",\"name\":\"country_id\",\"required\":false,\"schema\":{\"pattern\":\"^[A-Z]{2}$\",\"type\":\"string\"}},{\"description\":\"API key for authenticated requests. Required for requests exceeding the free tier limit of 100 names per day.\",\"in\":\"query\",\"name\":\"apikey\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"examples\":{\"multipleNames\":{\"summary\":\"Batch prediction for multiple names\",\"value\":[{\"count\":796799,\"gender\":\"male\",\"name\":\"peter\",\"probability\":0.99},{\"count\":52819,\"gender\":\"female\",\"name\":\"lois\",\"probability\":0.98}]},\"singleName\":{\"summary\":\"Single name prediction\",\"value\":{\"count\":796799,\"gender\":\"male\",\"name\":\"peter\",\"probability\":0.99}},\"withCountry\":{\"summary\":\"Prediction with country localization\",\"value\":{\"count\":12456,\"country_id\":\"US\",\"gender\":\"female\",\"name\":\"kim\",\"probability\":0.73}}},\"schema\":{\"oneOf\":[{\"description\":\"Gender prediction response for a single name\",\"properties\":{\"count\":{\"description\":\"Number of data records used to determine the gender prediction\",\"example\":796799,\"minimum\":0,\"type\":\"integer\"},\"country_id\":{\"description\":\"ISO 3166-1 alpha-2 country code if country localization was requested\",\"example\":\"US\",\"pattern\":\"^[A-Z]{2}$\",\"type\":\"string\"},\"gender\":{\"description\":\"Predicted gender for the name. Can be 'male', 'female', or null if insufficient data\",\"enum\":[\"male\",\"female\",null],\"example\":\"male\",\"type\":\"string\"},\"name\":{\"description\":\"The first name that was analyzed\",\"example\":\"peter\",\"type\":\"string\"},\"probability\":{\"description\":\"Confidence score of the prediction (0.0 to 1.0). Values closer to 0.5 indicate unisex names\",\"example\":0.99,\"format\":\"float\",\"maximum\":1,\"minimum\":0,\"type\":\"number\"}},\"required\":[\"name\",\"gender\",\"probability\",\"count\"],\"type\":\"object\"},{\"items\":{\"description\":\"Gender prediction response for a single name\",\"properties\":{\"count\":{\"description\":\"Number of data records used to determine the gender prediction\",\"example\":796799,\"minimum\":0,\"type\":\"integer\"},\"country_id\":{\"description\":\"ISO 3166-1 alpha-2 country code if country localization was requested\",\"example\":\"US\",\"pattern\":\"^[A-Z]{2}$\",\"type\":\"string\"},\"gender\":{\"description\":\"Predicted gender for the name. Can be 'male', 'female', or null if insufficient data\",\"enum\":[\"male\",\"female\",null],\"example\":\"male\",\"type\":\"string\"},\"name\":{\"description\":\"The first name that was analyzed\",\"example\":\"peter\",\"type\":\"string\"},\"probability\":{\"description\":\"Confidence score of the prediction (0.0 to 1.0). Values closer to 0.5 indicate unisex names\",\"example\":0.99,\"format\":\"float\",\"maximum\":1,\"minimum\":0,\"type\":\"number\"}},\"required\":[\"name\",\"gender\",\"probability\",\"count\"],\"type\":\"object\"},\"type\":\"array\"}]}}},\"description\":\"Successful gender prediction response\"},\"400\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Invalid parameter format\"},\"schema\":{\"description\":\"Error response object\",\"properties\":{\"error\":{\"description\":\"Error message describing what went wrong\",\"example\":\"Invalid API key\",\"type\":\"string\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Bad request - Invalid parameters\"},\"401\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Invalid API key\"},\"schema\":{\"description\":\"Error response object\",\"properties\":{\"error\":{\"description\":\"Error message describing what went wrong\",\"example\":\"Invalid API key\",\"type\":\"string\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing API key\"},\"422\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Missing name parameter\"},\"schema\":{\"description\":\"Error response object\",\"properties\":{\"error\":{\"description\":\"Error message describing what went wrong\",\"example\":\"Invalid API key\",\"type\":\"string\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Unprocessable Entity - Missing required name parameter\"},\"429\":{\"content\":{\"application/json\":{\"example\":{\"error\":\"Request limit reached\"},\"schema\":{\"description\":\"Error response object\",\"properties\":{\"error\":{\"description\":\"Error message describing what went wrong\",\"example\":\"Invalid API key\",\"type\":\"string\"}},\"required\":[\"error\"],\"type\":\"object\"}}},\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"security\":[{},{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authenticated requests. Required for usage beyond the free tier of 100 requests per day. Obtain your API key by registering at https://genderize.io/\",\"in\":\"query\",\"name\":\"apikey\",\"type\":\"apiKey\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/", "segments": [], "select": { "exist": ["apikey", "country_id", "name"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "get_gender", "name__orig": "get_gender", "Name": "GetGender", "name_": "get_gender", "name-": "get-gender", "NAME": "GET_GENDER", "index$": 0 }, { "active": true, "entity": "get_gender", "key$": "BasicGetGenderFlow", "kind": "basic", "name": "BasicGetGenderFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "get_gender_ref01", "srcdatavar": "get_gender_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-get_gender_ref01" } }], "index$": 0 }] }, 'GetGender');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -102,12 +100,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['GENDERIZEIO_TEST_GET_GENDER_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'GENDERIZEIO_TEST_GET_GENDER_ENTID': idmap,
         'GENDERIZEIO_TEST_LIVE': 'FALSE',
@@ -116,7 +108,13 @@ function basicSetup(extra) {
     });
     idmap = env['GENDERIZEIO_TEST_GET_GENDER_ENTID'];
     const live = 'TRUE' === env.GENDERIZEIO_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['GENDERIZEIO_TEST_GET_GENDER_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.GenderizeioSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -129,7 +127,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -141,7 +140,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.GENDERIZEIO_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;
