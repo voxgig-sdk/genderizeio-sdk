@@ -105,12 +105,12 @@ local result, err = client:GetGender():load({ name = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/genderizeio-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
-| Python | `voxgig-sdk-genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
-| PHP | `voxgig-sdk/genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
+| TypeScript | `@voxgig-sdk/genderizeio-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/tags) |
+| Python | `voxgig-sdk-genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/tags) |
+| PHP | `voxgig-sdk/genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/genderizeio-sdk/go` | `go get github.com/voxgig-sdk/genderizeio-sdk/go@latest` |
-| Ruby | `voxgig-sdk-genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
-| Lua | `voxgig-sdk-genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/releases) |
+| Ruby | `voxgig-sdk-genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/tags) |
+| Lua | `voxgig-sdk-genderizeio` | publish pending — [install from git tag](https://github.com/voxgig-sdk/genderizeio-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/genderizeio-sdk/go-cli` | `go install github.com/voxgig-sdk/genderizeio-sdk/go-cli/cmd/genderizeio@latest` |
 | Go MCP server | `github.com/voxgig-sdk/genderizeio-sdk/go-mcp` | `go get github.com/voxgig-sdk/genderizeio-sdk/go-mcp@latest` |
 

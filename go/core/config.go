@@ -81,6 +81,8 @@ func MakeConfig() map[string]any {
 			"base": "https://api.genderize.io",
 			"auth": map[string]any{
 				"prefix": "",
+				"in": "query",
+				"name": "apikey",
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",

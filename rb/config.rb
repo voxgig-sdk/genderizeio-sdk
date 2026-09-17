@@ -89,6 +89,8 @@ module GenderizeioConfig
         "base" => "https://api.genderize.io",
         "auth" => {
           "prefix" => "",
+          "in" => "query",
+          "name" => "apikey",
         },
         "headers" => {
           "content-type" => "application/json",
